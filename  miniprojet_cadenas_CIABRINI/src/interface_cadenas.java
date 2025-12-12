@@ -161,18 +161,21 @@ public class interface_cadenas extends javax.swing.JFrame {
                         nb_chiffre_exact.setText("Nombre de chiffres exacts :  ");
                         getContentPane().add(nb_chiffre_exact, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 160, -1));
 
+                        nb_chiffre_exact_res.setForeground(new java.awt.Color(51, 204, 0));
                         nb_chiffre_exact_res.setText("0");
                         getContentPane().add(nb_chiffre_exact_res, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 20, -1));
 
                         nb_chiffre_trop_haut.setText("Nombre de chiffres trop haut :  ");
                         getContentPane().add(nb_chiffre_trop_haut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 180, -1));
 
+                        nb_chiffre_trop_haut_res.setForeground(new java.awt.Color(255, 0, 0));
                         nb_chiffre_trop_haut_res.setText("0");
                         getContentPane().add(nb_chiffre_trop_haut_res, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 20, 20));
 
                         nb_chiffre_trop_bas.setText("Nombre de chiffres trop bas :  ");
                         getContentPane().add(nb_chiffre_trop_bas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 180, -1));
 
+                        nb_chiffre_trop_bas_res.setForeground(new java.awt.Color(255, 0, 0));
                         nb_chiffre_trop_bas_res.setText("0");
                         getContentPane().add(nb_chiffre_trop_bas_res, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 20, 20));
 
@@ -194,6 +197,7 @@ public class interface_cadenas extends javax.swing.JFrame {
                         });
                         getContentPane().add(bouton_recommencer, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 140, 30));
 
+                        bouton_difficulte.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
                         bouton_difficulte.setText("Difficulté");
                         bouton_difficulte.addActionListener(new java.awt.event.ActionListener() {
                             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -306,7 +310,7 @@ chiffres[3] = (chiffres[3] + 9) % 10;
             choix,
             choix[1]
     );
-//2Z2Z2
+    
     if (rep == -1) return; // l'utilisateur a fermé la fenêtre
 
     CadenasJeu.Difficulte d;
@@ -316,6 +320,26 @@ chiffres[3] = (chiffres[3] + 9) % 10;
 
     // applique la difficulté (et redémarre la partie)
     jeu.setDifficulte(d);
+    if (d == CadenasJeu.Difficulte.FACILE) {
+    bouton_difficulte.setBackground(java.awt.Color.GREEN);
+} else if (d == CadenasJeu.Difficulte.NORMAL) {
+    bouton_difficulte.setBackground(java.awt.Color.ORANGE);
+} else {
+    bouton_difficulte.setBackground(java.awt.Color.RED);
+}
+
+    java.awt.Color fond;
+
+if (d == CadenasJeu.Difficulte.FACILE) {
+    fond = new java.awt.Color(230, 255, 230); // vert clair
+} else if (d == CadenasJeu.Difficulte.NORMAL) {
+    fond = new java.awt.Color(235, 240, 245);
+} else {
+    fond = new java.awt.Color(255, 220, 220); // rouge clair
+}
+
+getContentPane().setBackground(fond);
+
 
     // reset chiffres affichés
     chiffres[0] = chiffres[1] = chiffres[2] = chiffres[3] = 0;

@@ -243,6 +243,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="nb_chiffre_exact_res">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="cc" red="33" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="0"/>
       </Properties>
       <Constraints>
@@ -263,6 +266,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="nb_chiffre_trop_haut_res">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="0"/>
       </Properties>
       <Constraints>
@@ -283,6 +289,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="nb_chiffre_trop_bas_res">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="0"/>
       </Properties>
       <Constraints>
@@ -336,6 +345,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="bouton_difficulte">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="2"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Difficult&#xe9;"/>
       </Properties>
       <Events>
