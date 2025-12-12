@@ -9,15 +9,35 @@
  */
 public class CadenasJeu {
 
+    public enum Difficulte {
+    FACILE(15),
+    NORMAL(10),
+    IMPOSSIBLE(5);
+
+    private final int maxEssais;
+
+    Difficulte(int maxEssais) {
+        this.maxEssais = maxEssais;
+    }
+
+    public int getMaxEssais() {
+        return maxEssais;
+    }
+}
+
     private int[] codeSecret = new int[4];
     private int tentatives = 0;
-    private final int TENTATIVES_MAX = 5;
+    private Difficulte difficulte = Difficulte.NORMAL;
+    private int tentativesMax = difficulte.getMaxEssais();
+
+
 
     public CadenasJeu() {
         genererCode();
     }
 
     public void genererCode() {
+        tentatives = 0;
         java.util.Random r = new java.util.Random();
         for (int i = 0; i < 4; i++) {
             codeSecret[i] = r.nextInt(10);
@@ -30,8 +50,20 @@ public class CadenasJeu {
     }
     
     public int getTentativesMax() {
-        return TENTATIVES_MAX;
-    }
+    return tentativesMax;
+}
+
+    
+    public void setDifficulte(Difficulte d) {
+    this.difficulte = d;
+    this.tentativesMax = d.getMaxEssais();
+    genererCode(); // reset partie + remet tentatives à 0
+}
+
+public Difficulte getDifficulte() {
+    return difficulte;
+}
+
 
     /**
      * Compare la combinaison proposée
@@ -57,8 +89,8 @@ public class CadenasJeu {
 
         return new int[]{ exact, haut, bas };
     }
-
-    public boolean partieTerminee() {
-        return tentatives >= TENTATIVES_MAX;
-    }
+//zdzdzdzdzd
+   public boolean partieTerminee() {
+    return tentatives >= tentativesMax;
+}
 }

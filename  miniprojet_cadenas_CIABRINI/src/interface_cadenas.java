@@ -53,6 +53,7 @@ public class interface_cadenas extends javax.swing.JFrame {
         tentatives_actuelles = new javax.swing.JLabel();
         tentatives_restantes = new javax.swing.JLabel();
         bouton_recommencer = new javax.swing.JButton();
+        bouton_difficulte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -193,6 +194,14 @@ public class interface_cadenas extends javax.swing.JFrame {
                         });
                         getContentPane().add(bouton_recommencer, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 140, 30));
 
+                        bouton_difficulte.setText("Difficulté");
+                        bouton_difficulte.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                bouton_difficulteActionPerformed(evt);
+                            }
+                        });
+                        getContentPane().add(bouton_difficulte, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 90, 30));
+
                         pack();
                     }// </editor-fold>//GEN-END:initComponents
 
@@ -204,6 +213,13 @@ public class interface_cadenas extends javax.swing.JFrame {
 
     tentatives_restantes.setText(jeu.getTentatives() + "/" + jeu.getTentativesMax());
 }
+    private void resetAffichageResultats() {
+    nb_chiffre_exact_res.setText("0");
+    nb_chiffre_trop_haut_res.setText("0");
+    nb_chiffre_trop_bas_res.setText("0");
+    rafraichirAffichage();
+}
+
     
     private void bouton_testerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_testerActionPerformed
 int[] resultat = jeu.tester(chiffres);
@@ -218,7 +234,11 @@ int[] resultat = jeu.tester(chiffres);
         javax.swing.JOptionPane.showMessageDialog(this, "Bravo ! Vous avez trouvé le code !");
     } 
     else if (jeu.partieTerminee()) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Perdu ! Vous avez utilisé les 5 tentatives.");
+        javax.swing.JOptionPane.showMessageDialog(
+    this,
+    "Perdu ! Vous avez utilisé les " + jeu.getTentativesMax() + " tentatives."
+);
+
     }        // TODO add your handling code here:
     }//GEN-LAST:event_bouton_testerActionPerformed
 
@@ -273,6 +293,40 @@ chiffres[3] = (chiffres[3] + 9) % 10;
     rafraichirAffichage();        // TODO add your handling code here:
     }//GEN-LAST:event_down_chiffre_4ActionPerformed
 
+    private void bouton_difficulteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_difficulteActionPerformed
+    String[] choix = {"FACILE (15 essais)", "NORMAL (10 essais)", "IMPOSSIBLE (5 essais)"};
+
+    int rep = javax.swing.JOptionPane.showOptionDialog(
+            this,
+            "Choisis une difficulté (la partie redémarre) :",
+            "Difficulté",
+            javax.swing.JOptionPane.DEFAULT_OPTION,
+            javax.swing.JOptionPane.QUESTION_MESSAGE,
+            null,
+            choix,
+            choix[1]
+    );
+//2Z2Z2
+    if (rep == -1) return; // l'utilisateur a fermé la fenêtre
+
+    CadenasJeu.Difficulte d;
+    if (rep == 0) d = CadenasJeu.Difficulte.FACILE;
+    else if (rep == 1) d = CadenasJeu.Difficulte.NORMAL;
+    else d = CadenasJeu.Difficulte.IMPOSSIBLE;
+
+    // applique la difficulté (et redémarre la partie)
+    jeu.setDifficulte(d);
+
+    // reset chiffres affichés
+    chiffres[0] = chiffres[1] = chiffres[2] = chiffres[3] = 0;
+
+    // met à jour le texte du bouton
+    bouton_difficulte.setText("Difficulté : " + d.name());
+
+    // reset affichage (résultats + tentatives)
+    resetAffichageResultats();   // TODO add your handling code here:
+    }//GEN-LAST:event_bouton_difficulteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -299,6 +353,7 @@ chiffres[3] = (chiffres[3] + 9) % 10;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bouton_difficulte;
     private javax.swing.JButton bouton_recommencer;
     private javax.swing.JButton bouton_tester;
     private javax.swing.JButton down_chiffre_1;
